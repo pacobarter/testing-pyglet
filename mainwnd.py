@@ -6,7 +6,7 @@ from pyglet.window import Window
 from pyglet.window import key
 from pyglet.window import mouse
 
-import world
+import camera
 
 #------------------------------------------------------
 #   window class 
@@ -14,11 +14,16 @@ import world
 class MainWnd(Window):
     #   Init
     #
-    def __init__(self,world):
+    def __init__(self,a_world):
         # super(MainWnd,self).__init__()
         Window.__init__(self)
 
-        self.the_world=world
+        self.the_world=a_world
+        self.the_camera=camera.Camera()
+        
+        self.the_camera.x=300
+        self.the_camera.y=-150
+        self.the_camera.z=80
         
     #   Update event
     #
@@ -30,8 +35,8 @@ class MainWnd(Window):
     #
     def on_draw(self):
         self.clear()
-
-        gl.glLoadIdentity()
+        
+        self.the_camera.activate(self.width, self.height)
 
         self.the_world.draw()
 
