@@ -1,9 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-import pyglet
-import mainwnd
+
+#import pyglet
+#import mainwnd
 import world
+from thread_glwnd import GLWndThrd
 
 #------------------------------------------------------
 #   MAIN
@@ -13,8 +15,12 @@ if __name__=='__main__':
 
     the_world=world.World()
     
-    wnd=mainwnd.MainWnd(the_world)
+#    wnd=mainwnd.MainWnd(the_world)
     
-    pyglet.clock.schedule_interval(wnd.update,1/float(frame_rate))
-    pyglet.app.run()
+#    pyglet.clock.schedule_interval(wnd.update,1/float(frame_rate))
+#    pyglet.app.run()
 
+    wnd=GLWndThrd(the_world,frame_rate)
+    wnd.start()
+
+    wnd.join()
