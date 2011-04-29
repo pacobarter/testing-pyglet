@@ -18,5 +18,7 @@ class GLWndThrd(threading.Thread):
         pyglet.clock.schedule_interval(self.wnd.update,1/float(self.frame_rate))
 
     def run(self):
-        pyglet.app.run()
+        #pyglet.app.run()
+        while not self.wnd.has_exit:
+            self.wnd.dispatch_events()
 
